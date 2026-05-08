@@ -1,0 +1,2 @@
+go in the teminal and run the command 
+"nodemon app.js"
