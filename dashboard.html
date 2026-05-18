@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Dashboard</title>
+
+  <link
+    rel="stylesheet"
+    href="dashboard.css"
+  >
+
+</head>
+
+<body>
+
+  <div class="dashboard">
+
+    <!-- SIDEBAR -->
+
+    <div class="sidebar">
+
+      <div class="logo">
+        Famunite
+      </div>
+
+      <ul>
+
+        <li onclick="showOverview()">
+          Overview
+        </li>
+
+        <li onclick="showProfile()">
+          View Profile
+        </li>
+
+        <li onclick="logout()">
+          Logout
+        </li>
+
+      </ul>
+
+    </div>
+
+
+
+    <!-- MAIN -->
+
+    <div class="main-content">
+
+      <!-- OVERVIEW -->
+
+      <div id="overview-section">
+
+        <h1>
+          Welcome 👋
+        </h1>
+
+        <p>
+          Manage your account details
+        </p>
+
+      </div>
+
+
+
+      <!-- PROFILE -->
+
+      <div
+        id="profile-section"
+        style="display:none;"
+      >
+
+        <div class="profile-card">
+
+          <div class="top-section">
+
+            <div class="avatar">
+              PK
+            </div>
+
+            <div>
+
+              <h2 id="profile_name">
+                Loading...
+              </h2>
+
+              <p id="profile_email">
+                Loading...
+              </p>
+
+            </div>
+
+          </div>
+
+
+
+          <div class="profile-grid">
+
+            <div class="box">
+
+              <h3>
+                First Name
+              </h3>
+
+              <p id="first_name">
+                -
+              </p>
+
+            </div>
+
+            <div class="box">
+
+              <h3>
+                Last Name
+              </h3>
+
+              <p id="last_name">
+                -
+              </p>
+
+            </div>
+
+            <div class="box">
+
+              <h3>
+                Email
+              </h3>
+
+              <p id="email">
+                -
+              </p>
+
+            </div>
+
+            <div class="box">
+
+              <h3>
+                Phone
+              </h3>
+
+              <p id="phone">
+                -
+              </p>
+
+            </div>
+
+            <div class="box">
+
+              <h3>
+                DOB
+              </h3>
+
+              <p id="dob">
+                -
+              </p>
+
+            </div>
+
+            <div class="box">
+
+              <h3>
+                Role
+              </h3>
+
+              <p id="role">
+                -
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+  <script src="dashboard.js"></script>
+
+</body>
+
+</html>

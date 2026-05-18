@@ -1,16 +1,11 @@
-// ===============================
-// DJANGO BACKEND BASE URL
-// ===============================
-
-const BASE_URL = "https://app.famunitehealthcare.com";
+const BASE_URL =
+  "https://app.famunitehealthcare.com";
 
 
 
-// ===============================
-// REGISTER API
-// ===============================
+// REGISTER
 
-async function register() {
+async function register(){
 
   const data = {
 
@@ -23,9 +18,9 @@ async function register() {
     dob:
       document.getElementById("DOB").value,
 
-    gender: "M",
+    gender:"M",
 
-    role: "patient",
+    role:"patient",
 
     email:
       document.getElementById("email").value,
@@ -41,28 +36,41 @@ async function register() {
 
   };
 
-  try {
+  try{
 
     const response = await fetch(
       `${BASE_URL}/api/v1/accounts/register/`,
       {
-        method: "POST",
+        method:"POST",
 
-        headers: {
-          "Content-Type": "application/json"
+        headers:{
+          "Content-Type":"application/json",
+          
         },
 
-        body: JSON.stringify(data)
+        body:JSON.stringify(data)
       }
     );
 
     const result = await response.json();
 
-    console.log("REGISTER RESPONSE :", result);
+    console.log(result);
 
     if(response.ok && result.success){
 
       alert("Registration Successful");
+
+      document.getElementById(
+        "register-section"
+      ).style.display = "none";
+
+      document.getElementById(
+        "otp-section"
+      ).style.display = "block";
+
+      document.getElementById(
+        "otp_email"
+      ).value = data.email;
 
     }else{
 
@@ -74,11 +82,9 @@ async function register() {
 
     }
 
-  } catch (error) {
+  }catch(error){
 
-    console.error("REGISTER ERROR :", error);
-
-    alert("Registration Failed");
+    console.log(error);
 
   }
 
@@ -86,11 +92,9 @@ async function register() {
 
 
 
-// ===============================
-// VERIFY OTP API
-// ===============================
+// VERIFY OTP
 
-async function verifyOtp() {
+async function verifyOtp(){
 
   const data = {
 
@@ -102,28 +106,41 @@ async function verifyOtp() {
 
   };
 
-  try {
+  try{
 
     const response = await fetch(
       `${BASE_URL}/api/v1/accounts/verify-otp/`,
       {
-        method: "POST",
+        method:"POST",
 
-        headers: {
-          "Content-Type": "application/json"
+        headers:{
+          "Content-Type":"application/json",
+          
         },
 
-        body: JSON.stringify(data)
+        body:JSON.stringify(data)
       }
     );
 
     const result = await response.json();
 
-    console.log("OTP RESPONSE :", result);
+    console.log(result);
 
     if(response.ok && result.success){
 
-      alert("OTP Verified Successfully");
+      alert("OTP Verified");
+
+      document.getElementById(
+        "otp-section"
+      ).style.display = "none";
+
+      document.getElementById(
+        "login-section"
+      ).style.display = "block";
+
+      document.getElementById(
+        "login_email"
+      ).value = data.identifier;
 
     }else{
 
@@ -135,11 +152,9 @@ async function verifyOtp() {
 
     }
 
-  } catch (error) {
+  }catch(error){
 
-    console.error("OTP ERROR :", error);
-
-    alert("OTP Verification Failed");
+    console.log(error);
 
   }
 
@@ -147,11 +162,52 @@ async function verifyOtp() {
 
 
 
-// ===============================
-// LOGIN API
-// ===============================
+// RESEND OTP
 
-async function login() {
+async function resendOtp(){
+
+  const data = {
+
+    identifier:
+      document.getElementById("otp_email").value
+
+  };
+
+  try{
+
+    const response = await fetch(
+      `${BASE_URL}/api/v1/accounts/resend-otp/`,
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json",
+          
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+    const result = await response.json();
+
+    console.log(result);
+
+    alert(result.message);
+
+  }catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+
+
+// LOGIN
+
+async function login(){
 
   const data = {
 
@@ -163,103 +219,70 @@ async function login() {
 
   };
 
-  try {
+  try{
 
     const response = await fetch(
       `${BASE_URL}/api/v1/accounts/login/`,
       {
-        method: "POST",
+        method:"POST",
 
-        headers: {
-          "Content-Type": "application/json"
+        headers:{
+          "Content-Type":"application/json",
+          
         },
 
-        body: JSON.stringify(data)
+        body:JSON.stringify(data)
       }
     );
 
     const result = await response.json();
 
-    console.log("LOGIN RESPONSE :", result);
-
-
+    console.log(result);
 
     if(response.ok && result.success){
-
-      // SAVE TOKEN
 
       localStorage.setItem(
         "token",
         result.data.access
       );
 
-
-
-      // GET USER DATA
-
       const user = result.data.user;
 
-
-
-      // HIDE AUTH SECTION
-
       document.getElementById(
-        "auth-container"
+        "login-section"
       ).style.display = "none";
 
-
-
-      // SHOW USER SECTION
-
-      document.getElementById(
-        "user-section"
-      ).style.display = "block";
-
-
-
-      // SHOW USER DETAILS
+      localStorage.setItem(
+        "token",
+        result.data.access
+      );
+      
+      window.location.href =
+        "dashboard.html";
 
       document.getElementById(
         "user_first_name"
       ).innerText = user.first_name || "-";
 
-
-
       document.getElementById(
         "user_last_name"
       ).innerText = user.last_name || "-";
-
-
 
       document.getElementById(
         "user_email"
       ).innerText = user.email || "-";
 
-
-
       document.getElementById(
         "user_phone"
       ).innerText = user.phone_number || "-";
-
-
 
       document.getElementById(
         "user_dob"
       ).innerText = user.dob || "-";
 
-
-
-      document.getElementById(
-        "user_gender"
-      ).innerText = user.gender || "-";
-
-
-
       document.getElementById(
         "user_role"
       ).innerText = user.role || "-";
-
-
 
       alert("Login Successful");
 
@@ -273,11 +296,9 @@ async function login() {
 
     }
 
-  } catch (error) {
+  }catch(error){
 
-    console.error("LOGIN ERROR :", error);
-
-    alert("Login Failed");
+    console.log(error);
 
   }
 
@@ -285,9 +306,151 @@ async function login() {
 
 
 
-// ===============================
+
+
+
+// SHOW FORGOT PASSWORD
+
+function showForgotPassword(){
+
+  document.getElementById(
+    "login-section"
+  ).style.display = "none";
+
+  document.getElementById(
+    "forgot-section"
+  ).style.display = "block";
+
+}
+
+
+
+// FORGOT PASSWORD
+
+async function forgotPassword(){
+
+  const data = {
+
+    email:
+      document.getElementById("forgot_email").value
+
+  };
+
+  try{
+
+    const response = await fetch(
+      `${BASE_URL}/api/v1/accounts/forgot-password/`,
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json",
+          
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+    const result = await response.json();
+
+    console.log(result);
+
+    if(response.ok){
+
+      alert("OTP Sent");
+
+      document.getElementById(
+        "forgot-section"
+      ).style.display = "none";
+
+      document.getElementById(
+        "reset-section"
+      ).style.display = "block";
+
+      document.getElementById(
+        "reset_email"
+      ).value = data.email;
+
+    }
+
+  }catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+
+
+// RESET PASSWORD
+
+async function resetPassword(){
+
+  const data = {
+
+    email:
+      document.getElementById("reset_email").value,
+
+    otp:
+      document.getElementById("reset_otp").value,
+
+    new_password:
+      document.getElementById("new_password").value,
+
+    confirm_password:
+      document.getElementById(
+        "confirm_new_password"
+      ).value
+
+  };
+
+  try{
+
+    const response = await fetch(
+      `${BASE_URL}/api/v1/accounts/reset-password/`,
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json",
+          
+        },
+
+        body:JSON.stringify(data)
+      }
+    );
+
+    const result = await response.json();
+
+    console.log(result);
+
+    if(response.ok){
+
+      alert("Password Reset Successful");
+
+      document.getElementById(
+        "reset-section"
+      ).style.display = "none";
+
+      document.getElementById(
+        "login-section"
+      ).style.display = "block";
+
+    }
+
+  }catch(error){
+
+    console.log(error);
+
+  }
+
+}
+
+
+
 // LOGOUT
-// ===============================
 
 function logout(){
 

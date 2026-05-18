@@ -1,9 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Famunite Auth</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <title>Famunite Healthcare</title>
 
   <style>
 
@@ -11,12 +18,12 @@
       margin:0;
       padding:0;
       box-sizing:border-box;
-      font-family: Arial, Helvetica, sans-serif;
+      font-family:Arial, Helvetica, sans-serif;
     }
 
     body{
       min-height:100vh;
-      background: linear-gradient(
+      background:linear-gradient(
         135deg,
         #0f172a,
         #1e3a8a,
@@ -24,7 +31,7 @@
         #38bdf8
       );
       background-size:400% 400%;
-      animation: gradientMove 12s ease infinite;
+      animation:gradientMove 10s ease infinite;
       padding:40px;
     }
 
@@ -47,7 +54,7 @@
     .main-title{
       text-align:center;
       color:white;
-      margin-bottom:50px;
+      margin-bottom:40px;
     }
 
     .main-title h1{
@@ -59,40 +66,27 @@
       color:#38bdf8;
     }
 
-    .main-title p{
-      color:rgba(255,255,255,0.8);
-    }
-
     .container{
       width:100%;
-      max-width:1300px;
+      max-width:500px;
       margin:auto;
-      display:grid;
-      grid-template-columns: repeat(auto-fit,minmax(340px,1fr));
-      gap:35px;
     }
 
     .card{
-      background: rgba(255,255,255,0.12);
-      backdrop-filter: blur(18px);
-      border:1px solid rgba(255,255,255,0.2);
+      background:rgba(255,255,255,0.12);
+      backdrop-filter:blur(18px);
       border-radius:25px;
       padding:35px;
+      border:1px solid rgba(255,255,255,0.2);
       box-shadow:0 10px 40px rgba(0,0,0,0.35);
-      animation: fadeIn 1s ease;
-      transition:0.4s;
-    }
-
-    .card:hover{
-      transform:translateY(-8px);
-      box-shadow:0 20px 45px rgba(0,0,0,0.45);
+      animation:fadeIn 0.7s ease;
     }
 
     @keyframes fadeIn{
 
       from{
         opacity:0;
-        transform:translateY(30px);
+        transform:translateY(20px);
       }
 
       to{
@@ -105,59 +99,33 @@
     h2{
       color:white;
       margin-bottom:25px;
-      font-size:24px;
-      position:relative;
-      padding-bottom:10px;
-    }
-
-    h2::after{
-      content:'';
-      position:absolute;
-      left:0;
-      bottom:0;
-      width:60px;
-      height:4px;
-      border-radius:10px;
-      background:#38bdf8;
     }
 
     .input-group{
       display:flex;
       flex-direction:column;
-      gap:18px;
+      gap:16px;
     }
 
     input{
-      width:100%;
-      padding:15px 18px;
+      padding:15px;
       border:none;
       outline:none;
       border-radius:14px;
-      background: rgba(255,255,255,0.15);
+      background:rgba(255,255,255,0.15);
       color:white;
       font-size:15px;
-      transition:0.3s;
-      border:1px solid transparent;
     }
 
     input::placeholder{
       color:rgba(255,255,255,0.7);
     }
 
-    input:focus{
-      border:1px solid #38bdf8;
-      background: rgba(255,255,255,0.2);
-      transform:scale(1.02);
-      box-shadow:0 0 15px rgba(56,189,248,0.4);
-    }
-
     button{
-      width:100%;
-      margin-top:10px;
       padding:15px;
       border:none;
       border-radius:14px;
-      background: linear-gradient(
+      background:linear-gradient(
         135deg,
         #06b6d4,
         #2563eb
@@ -167,62 +135,50 @@
       font-weight:bold;
       cursor:pointer;
       transition:0.3s;
-      box-shadow:0 8px 20px rgba(37,99,235,0.35);
     }
 
     button:hover{
       transform:translateY(-3px);
-      box-shadow:0 12px 25px rgba(37,99,235,0.5);
     }
 
+    .link-btn{
+      background:none;
+      border:none;
+      color:#38bdf8;
+      margin-top:10px;
+      cursor:pointer;
+    }
+
+    #otp-section,
+    #login-section,
+    #forgot-section,
+    #reset-section,
     #user-section{
       display:none;
-      max-width:1300px;
-      margin:auto;
     }
 
     .profile-box{
       display:grid;
-      grid-template-columns: repeat(auto-fit,minmax(220px,1fr));
-      gap:20px;
-      margin-top:25px;
+      grid-template-columns:1fr 1fr;
+      gap:15px;
+      margin-top:20px;
     }
 
     .profile-item{
-      background: rgba(255,255,255,0.08);
-      padding:20px;
-      border-radius:18px;
-      border:1px solid rgba(255,255,255,0.1);
-      transition:0.3s;
-    }
-
-    .profile-item:hover{
-      transform:translateY(-5px);
-      background: rgba(255,255,255,0.12);
+      background:rgba(255,255,255,0.08);
+      padding:15px;
+      border-radius:15px;
     }
 
     .profile-item h3{
       color:#38bdf8;
-      font-size:15px;
-      margin-bottom:10px;
+      margin-bottom:8px;
+      font-size:14px;
     }
 
     .profile-item p{
       color:white;
-      font-size:16px;
-      word-break:break-word;
-    }
-
-    @media(max-width:768px){
-
-      body{
-        padding:20px;
-      }
-
-      .main-title h1{
-        font-size:30px;
-      }
-
+      font-size:15px;
     }
 
   </style>
@@ -231,29 +187,26 @@
 
 <body>
 
-  <!-- TITLE -->
-
   <div class="main-title">
 
     <h1>
       Famunite <span>Healthcare</span>
     </h1>
 
-    <p>
-      Authentication & Verification Portal
+    <p style="color:white;">
+      Authentication Portal
     </p>
 
   </div>
 
-
-
-  <!-- AUTH SECTION -->
-
-  <div class="container" id="auth-container">
+  <div class="container">
 
     <!-- REGISTER -->
 
-    <div class="card">
+    <div
+      class="card"
+      id="register-section"
+    >
 
       <h2>Register</h2>
 
@@ -304,9 +257,12 @@
 
 
 
-    <!-- VERIFY OTP -->
+    <!-- OTP -->
 
-    <div class="card">
+    <div
+      class="card"
+      id="otp-section"
+    >
 
       <h2>Verify OTP</h2>
 
@@ -328,6 +284,10 @@
           Verify OTP
         </button>
 
+        <button onclick="resendOtp()">
+          Resend OTP
+        </button>
+
       </div>
 
     </div>
@@ -336,7 +296,10 @@
 
     <!-- LOGIN -->
 
-    <div class="card">
+    <div
+      class="card"
+      id="login-section"
+    >
 
       <h2>Login</h2>
 
@@ -358,71 +321,146 @@
           Login
         </button>
 
+        <button
+          class="link-btn"
+          onclick="showForgotPassword()"
+        >
+          Forgot Password?
+        </button>
+
       </div>
 
     </div>
 
-  </div>
 
 
+    <!-- FORGOT PASSWORD -->
 
-  <!-- USER DETAILS -->
+    <div
+      class="card"
+      id="forgot-section"
+    >
 
-  <div
-    class="card"
-    id="user-section"
-  >
+      <h2>Forgot Password</h2>
 
-    <h2>User Details</h2>
+      <div class="input-group">
 
-    <div class="profile-box">
+        <input
+          id="forgot_email"
+          type="email"
+          placeholder="Enter Email"
+        >
 
-      <div class="profile-item">
-        <h3>First Name</h3>
-        <p id="user_first_name">-</p>
-      </div>
+        <button onclick="forgotPassword()">
+          Send OTP
+        </button>
 
-      <div class="profile-item">
-        <h3>Last Name</h3>
-        <p id="user_last_name">-</p>
-      </div>
-
-      <div class="profile-item">
-        <h3>Email</h3>
-        <p id="user_email">-</p>
-      </div>
-
-      <div class="profile-item">
-        <h3>Phone Number</h3>
-        <p id="user_phone">-</p>
-      </div>
-
-      <div class="profile-item">
-        <h3>Date of Birth</h3>
-        <p id="user_dob">-</p>
-      </div>
-
-      <div class="profile-item">
-        <h3>Gender</h3>
-        <p id="user_gender">-</p>
-      </div>
-
-      <div class="profile-item">
-        <h3>Role</h3>
-        <p id="user_role">-</p>
       </div>
 
     </div>
 
-    <br><br>
 
-    <button onclick="logout()">
-      Logout
-    </button>
+
+    <!-- RESET PASSWORD -->
+
+    <div
+      class="card"
+      id="reset-section"
+    >
+
+      <h2>Reset Password</h2>
+
+      <div class="input-group">
+
+        <input
+          id="reset_email"
+          type="email"
+          placeholder="Email"
+        >
+
+        <input
+          id="reset_otp"
+          type="text"
+          placeholder="OTP"
+        >
+
+        <input
+          id="new_password"
+          type="password"
+          placeholder="New Password"
+        >
+
+        <input
+          id="confirm_new_password"
+          type="password"
+          placeholder="Confirm Password"
+        >
+
+        <button onclick="resetPassword()">
+          Reset Password
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- USER DETAILS -->
+
+    <div
+      class="card"
+      id="user-section"
+    >
+
+      <h2>User Details</h2>
+
+      <div class="profile-box">
+
+        <div class="profile-item">
+          <h3>First Name</h3>
+          <p id="user_first_name">-</p>
+        </div>
+
+        <div class="profile-item">
+          <h3>Last Name</h3>
+          <p id="user_last_name">-</p>
+        </div>
+
+        <div class="profile-item">
+          <h3>Email</h3>
+          <p id="user_email">-</p>
+        </div>
+
+        <div class="profile-item">
+          <h3>Phone</h3>
+          <p id="user_phone">-</p>
+        </div>
+
+        <div class="profile-item">
+          <h3>DOB</h3>
+          <p id="user_dob">-</p>
+        </div>
+
+        <div class="profile-item">
+          <h3>Role</h3>
+          <p id="user_role">-</p>
+        </div>
+
+      </div>
+
+      <br>
+
+      <button onclick="logout()">
+        Logout
+      </button>
+
+    </div>
 
   </div>
 
   <script src="app.js"></script>
 
 </body>
+
 </html>
